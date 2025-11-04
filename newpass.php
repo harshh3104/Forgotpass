@@ -73,7 +73,7 @@ $(document).ready(function(){
 	<?php
         if(isset($_POST['login']))
         {
-            // $str="update registrations set password='"$_POST[""]"'";
+            $str="update registrations set password='".$_POST["pass"]."'";
             
             $result=mysqli_query($conn,$str);
             $row=mysqli_fetch_array($result);

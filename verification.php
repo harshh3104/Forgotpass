@@ -46,11 +46,12 @@
 </head>
 <body>
 	<?php
+        $otp=rand(1000,9999);        
         if(isset($_POST['verotp']))
         {
-            $otp=rand(1000,9999);        
+            $_SESSION["otp"]=$otp;
             $otp1=$_POST["otp"];
-            if($otp === $otp1)
+            if($_SESSION["otp"] === $otp1)
             {
                 $valid="<center><p style='color:red; font-weight:bold;'>OTP Matched!</p><center>";
                 header("location:newpass.php");
