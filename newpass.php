@@ -5,10 +5,9 @@
 
 <html>
 <head>
-    <title>Login</title>
+    <title>New Password</title>
     <link rel="stylesheet" href="bootstrap.min.css">
 	<script src="jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 $(document).ready(function(){
 	$("#NewForm").submit(function()
@@ -18,11 +17,18 @@ $(document).ready(function(){
 		
         if(f=="")
 		{
-			$('.passerror').text('Password must be at least 8 characters!');
+			$('.passerror').text('Password Is Required!');
 			$('.passerror').css('color','red');
-			$('#cpass').focus();
+			$('#pass').focus();
 			return false;
 		}
+        else if(f.length < 8 || f.length > 8)
+        {
+            $('.passerror').text('Password must be only 8 characters!');
+			$('.passerror').css('color','red');
+			$('#pass').focus();
+			return false;
+        }
 		else
 		{
 			$('.passerror').text('');
@@ -30,12 +36,19 @@ $(document).ready(function(){
 
 		if(h=="")
 		{
-			$('.cpasserror').text('Password must be at least 8 characters!');
+			$('.cpasserror').text('Enter Confirm Password!');
 			$('.cpasserror').css('color','red');
 			$('#cpass').focus();
 			return false;
 		}
-		else
+        else if(f!=h)
+        {
+            $('.cpasserror').text('Password Not Matched!');
+            $('.cpasserror').css('color','red');
+			$('#cpass').focus();
+			return false;
+        }
+        else
 		{
 			$('.passerror').text('');
 		}
@@ -71,19 +84,21 @@ $(document).ready(function(){
 </head>
 <body>
 	<?php
-        if(isset($_POST['login']))
+        if(isset($_GET["email"]))
         {
-            $str="update registrations set password='".$_POST["pass"]."'";
-            
-            $result=mysqli_query($conn,$str);
-            $row=mysqli_fetch_array($result);
-            $count=mysqli_num_rows($result);
-            
+            $em = $_GET["email"];
+        }
+        if(isset($_POST['newpass']))
+        {
+            $str="update registrations set password='".$_POST["cpass"]."' where email='".$em."'";
+            mysqli_query($conn,$str);
+            $log="<center><a href='login.php'>Login Now</a></center>";
+            //$row=mysqli_fetch_array($result);
         }
     ?>
     <div class="auth-box">
     <form id="NewForm" method="POST">
-        <h3 class="mt-4 text-center">Login</h3>
+        <h3 class="mt-4 text-center">New Password</h3>
         <div class="mt-4">
             <label>Password</label>
             <input type="text" id="pass" name="pass" class="form-control" placeholder="Enter New Password">
@@ -93,21 +108,22 @@ $(document).ready(function(){
 		
         <div class="mt-4">
             <label>Confirm Password</label>
-            <input type="password" name="cpass" id="cpass" class="form-control" placeholder="Enter Confirm Password">
+            <input type="text" name="cpass" id="cpass" class="form-control" placeholder="Enter Confirm Password">
         </div>
 		
 		<span class="cpasserror"></span>
 		
-		<br>
+		<br><br>
         
+        <button type="submit" name="newpass" class="btn btn-success w-100"><b>Submit</b></button>
+        
+        <br><br>
         <?php 
-            if(isset($invalid))
+            if(isset($log))
             {
-                echo $invalid;
+                echo $log;
             }
         ?>
-		<button type="submit" name="newpass" class="btn btn-success w-100">Login</button>
-		
     </form>
 </div>
 </body>

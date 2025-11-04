@@ -8,7 +8,6 @@
     <title>VerifyOTP</title>
     <link rel="stylesheet" href="bootstrap.min.css">
 	<script src="jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 // $(document).ready(function(){
 // 	$("#VerifyForm").submit(function()
@@ -46,15 +45,24 @@
 </head>
 <body>
 	<?php
-        $otp=rand(1000,9999);        
+        $SESSION_KEY = 'otp_for_verification';
+        if (!isset($_SESSION[$SESSION_KEY])) 
+        {
+            $otp = rand(1000, 9999);
+            $_SESSION[$SESSION_KEY] = $otp; // Store the *correct* code in the session
+        } 
+        else 
+        {
+            // Use the existing OTP from the session for display and comparison
+            $otp = $_SESSION[$SESSION_KEY];
+        }
         if(isset($_POST['verotp']))
         {
-            $_SESSION["otp"]=$otp;
             $otp1=$_POST["otp"];
-            if($_SESSION["otp"] === $otp1)
+            if($_SESSION[$SESSION_KEY] == $otp1)
             {
                 $valid="<center><p style='color:red; font-weight:bold;'>OTP Matched!</p><center>";
-                header("location:newpass.php");
+                header("location:newpass.php?email=".$_SESSION['mail']."");
             }    
             else
             {                

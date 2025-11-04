@@ -8,7 +8,6 @@
     <title>ForgotPassword</title>
     <link rel="stylesheet" href="bootstrap.min.css">
 	<script src="jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 $(document).ready(function(){
 	$("#PassForm").submit(function()
@@ -69,17 +68,14 @@ $(document).ready(function(){
         if(isset($_POST['Forpass']))
         {
             $str="select * from registrations where email='".$_POST['maill']."'";
-            // echo $str;
-                $result=mysqli_query($conn,$str);
-                $row=mysqli_fetch_array($result);
-                $count=mysqli_num_rows($result);
-            //echo $count;die;
+            $result=mysqli_query($conn,$str);
+            $row=mysqli_fetch_array($result);
+            $count=mysqli_num_rows($result);            
             
             if($count>0)
             {
                 $_SESSION['mail']=$_POST['maill'];
-                //$_SESSION['mail']=$row['name'];
-                header("location:verification.php");
+                header("location:verification.php?email=".$_SESSION['mail']."");
             }
             else
             {
