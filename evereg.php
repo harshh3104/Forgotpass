@@ -129,11 +129,9 @@ $(document).ready(function(){
         <button type="submit" name="register" class="btn btn-primary w-100">Register</button>
 		
         <p class="mt-4 text-center">
-            Already have an account? <a href="login.php"><span class="toggle-link" id="showLogin">Login here</span></a>
+            Already have an account? <a href="index.php"><span class="toggle-link" id="showLogin">Login here</span></a>
         </p>
-		
     </form>
-	
 </div>
 </body>
 </html>

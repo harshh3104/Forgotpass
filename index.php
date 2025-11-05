@@ -80,9 +80,9 @@ $(document).ready(function(){
         {
             $str="select * from registrations where email='".$_POST['maill']."' AND password='".$_POST['pswd']."'";
             // echo $str;
-                $result=mysqli_query($conn,$str);
-                $row=mysqli_fetch_array($result);
-                $count=mysqli_num_rows($result);
+            $result=mysqli_query($conn,$str);
+            $row=mysqli_fetch_array($result);
+            $count=mysqli_num_rows($result);
             //echo $count;die;
             
             if($count>0)

@@ -18,29 +18,29 @@
 </script>
 
 <style>
-        body{
-            background: pink;
-			font-family: cursive;
-			font-weight; bold;
-            display: flex;
-            justify-content: center;
-			align-items: center;
-            height: 100vh;
-        }
-		.auth-box {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-            width: 450px;
-        }
-		.toggle-link {
-            color: #007bff;
-            cursor: pointer;
-        }
-        .toggle-link:hover {
-            text-decoration: underline;
-        }
+    body{
+        background: pink;
+        font-family: cursive;
+        font-weight; bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .auth-box {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        width: 450px;
+    }
+    .toggle-link {
+        color: #007bff;
+        cursor: pointer;
+    }
+    .toggle-link:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body>
@@ -59,10 +59,10 @@
         if(isset($_POST['verotp']))
         {
             $otp1=$_POST["otp"];
-            if($_SESSION[$SESSION_KEY] == $otp1)
+            if($otp1 == $_SESSION['otp'])
             {
                 $valid="<center><p style='color:red; font-weight:bold;'>OTP Matched!</p><center>";
-                header("location:newpass.php?email=".$_SESSION['mail']."");
+                header("location:newpass.php");
             }    
             else
             {                
@@ -73,10 +73,6 @@
     <div class="auth-box">
     <form id="VerifyForm" method="POST">
         <h3 class="mt-4 text-center">Verification</h3>
-        <br>
-        <?php 
-            echo "<b>Your OTP=</b>"."<b>".$otp."</b>";
-        ?>        
         <div class="mt-4">
             <label>Enter OTP</label>
             <input type="text" id="otp" name="otp" class="form-control" placeholder="Enter OTP">
@@ -90,7 +86,6 @@
             }
         ?>
 		<button type="submit" name="verotp" class="btn btn-success w-100">Submit</button>
-		
     </form>
 </div>
 </body>

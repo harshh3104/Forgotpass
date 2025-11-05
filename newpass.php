@@ -84,15 +84,11 @@ $(document).ready(function(){
 </head>
 <body>
 	<?php
-        if(isset($_GET["email"]))
-        {
-            $em = $_GET["email"];
-        }
         if(isset($_POST['newpass']))
         {
-            $str="update registrations set password='".$_POST["cpass"]."' where email='".$em."'";
+            $str="update registrations set password='".$_POST["cpass"]."' where email='".$_SESSION['email']."'";
             mysqli_query($conn,$str);
-            $log="<center><a href='login.php'>Login Now</a></center>";
+            $log="<center><a href='index.php'>Login Now</a></center>";
             //$row=mysqli_fetch_array($result);
         }
     ?>
