@@ -91,7 +91,7 @@ $(document).ready(function(){
             $_SESSION['email'] = $email;
 
             // 3. Use PHPMailer to send the email
-            $mail = new PHPMailer(+true); // Create a new PHPMailer instance
+            $mail = new PHPMailer(true); // Create a new PHPMailer instance
 
             try {
                 $mail->isSMTP();
